@@ -2,46 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-neutral-800 font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-bold text-primary-dark;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-7 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 font-sans;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary-dark text-white font-semibold py-3 px-7 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 font-sans;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .section-tag {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase text-secondary bg-secondary/10 px-3 py-1.5 rounded-full mb-4;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-black text-primary-dark mb-4 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-base text-neutral-500 max-w-2xl mx-auto leading-relaxed;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+}
+
 @layer utilities {
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
+  .animation-delay-150 {
+    animation-delay: 150ms;
   }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+}
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
 
-  .animate-blob {
-    animation: blob 7s infinite;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
 
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-
-  .animate-fadeIn {
-    animation: fadeIn 1s ease-out;
-  }
+.animate-fadeInUp {
+  animation: fadeInUp 0.65s ease-out forwards;
+  opacity: 0;
 }

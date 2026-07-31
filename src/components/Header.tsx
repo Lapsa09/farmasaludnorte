@@ -1,97 +1,122 @@
-import { useWindowScroll } from "@uidotdev/usehooks";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import logoColor from "/assets/logo-color.png";
 
-function Header() {
+function Header({
+  refs,
+}: {
+  refs: Record<string, React.RefObject<HTMLElement>>;
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [{ y }, setScroll] = useWindowScroll();
+  const [scrolled, setScrolled] = useState(false);
 
-  const scrolled = Boolean(y && y > 50);
+  useEffect(() => {
+    const HEADER_H = 80; // matches h-20 in Tailwind
+
+    const check = () => {
+      // Check all elements behind the header's bottom edge
+      const elements = document.elementsFromPoint(
+        window.innerWidth / 2,
+        HEADER_H,
+      );
+      const isOverDark = elements.some(
+        (el) => !el.closest("header") && el.hasAttribute("data-header-dark"),
+      );
+      setScrolled(!isOverDark);
+    };
+
+    window.addEventListener("scroll", check, { passive: true });
+    check(); // run on mount
+    return () => window.removeEventListener("scroll", check);
+  }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    setScroll({ top: element?.offsetTop, behavior: "smooth" });
+    const element = refs[id]?.current;
+    if (element) element.scrollIntoView({ behavior: "smooth" });
     setIsMenuOpen(false);
   };
+
+  const links = [
+    { id: "home", label: "Inicio" },
+    { id: "services", label: "Servicios" },
+    { id: "mission", label: "Nosotros" },
+    { id: "why", label: "¿Por qué elegirnos?" },
+    { id: "contact", label: "Contacto" },
+  ];
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-gradient-to-br from-green-700 via-green-600 to-emerald-500 shadow-lg py-4"
-          : "bg-transparent py-6"
+      className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-400 ${
+        scrolled ? "bg-transparent backdrop-blur-md shadow-sm" : "bg-white/98"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+        {/* Logo */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex-shrink-0 focus:outline-none"
+          aria-label="Volver al inicio"
+        >
           <img
-            src="/assets/logo_color.png"
-            alt="Logo Farma Salud Norte"
-            className="h-16"
+            src={logoColor}
+            alt="Farma Salud Norte"
+            className={`h-11 w-auto object-contain transition-all duration-300 ${"[filter:drop-shadow(1px_0_0_rgba(255,255,255,0.5))_drop-shadow(-1px_0_0_rgba(255,255,255,0.5))_drop-shadow(0_1px_0_rgba(255,255,255,0.5))_drop-shadow(0_-1px_0_rgba(255,255,255,0.5))]"}`}
           />
+        </button>
 
-          <nav className="hidden md:flex items-center space-x-8">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-7">
+          {links.map((link) => (
             <button
-              onClick={() => scrollToSection("home")}
-              className="text-white font-light text-sm uppercase tracking-wider hover:text-green-200 transition-colors"
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              className={`relative text-sm font-medium transition-colors duration-200 group ${
+                scrolled
+                  ? "text-neutral-700 hover:text-primary"
+                  : "text-white/85 hover:text-white"
+              }`}
             >
-              Inicio
+              {link.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full rounded-full" />
             </button>
-            <button
-              onClick={() => scrollToSection("mission")}
-              className="text-white font-light text-sm uppercase tracking-wider hover:text-green-200 transition-colors"
-            >
-              Misión & Visión
-            </button>
-            <button
-              onClick={() => scrollToSection("why")}
-              className="text-white font-light text-sm uppercase tracking-wider hover:text-green-200 transition-colors"
-            >
-              ¿Por qué elegirnos?
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-white font-light text-sm uppercase tracking-wider hover:text-green-200 transition-colors"
-            >
-              Contacto
-            </button>
-          </nav>
+          ))}
+        </nav>
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`md:hidden p-2 rounded-lg transition-colors ${
+            scrolled
+              ? "text-neutral-800 hover:bg-neutral-100"
+              : "text-white hover:bg-white/10"
+          }`}
+          aria-label="Abrir menú"
+        >
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
+      {/* Mobile dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg mt-4 rounded-lg mx-4 overflow-hidden">
-          <nav className="flex flex-col">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="px-6 py-4 text-left text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-            >
-              Inicio
-            </button>
-            <button
-              onClick={() => scrollToSection("mission")}
-              className="px-6 py-4 text-left text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-            >
-              Misión & Visión
-            </button>
-            <button
-              onClick={() => scrollToSection("why")}
-              className="px-6 py-4 text-left text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-            >
-              ¿Por qué elegirnos?
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="px-6 py-4 text-left text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-            >
-              Contacto
-            </button>
+        <div className="md:hidden bg-white border-t border-neutral-100 absolute w-full shadow-xl">
+          <nav className="flex flex-col py-3">
+            {links.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className="px-6 py-3.5 text-left text-neutral-700 hover:bg-primary-50 hover:text-primary font-medium text-sm transition-colors border-l-4 border-transparent hover:border-primary"
+              >
+                {link.label}
+              </button>
+            ))}
+            <div className="px-6 py-4">
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="w-full btn-secondary text-center text-sm"
+              >
+                Portal Clientes
+              </button>
+            </div>
           </nav>
         </div>
       )}
