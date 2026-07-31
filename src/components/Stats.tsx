@@ -3,18 +3,17 @@ import Counter from "./animata/text/counter";
 
 const FUNDACION = 2018;
 
-const stats = [
-  {
-    value: new Date().getFullYear() - FUNDACION,
-    prefix: "+",
-    label: "Años de trayectoria",
-  },
-  { value: 3000, prefix: "+", label: "Productos disponibles" },
-  { value: 24, suffix: "hs", label: "Entrega efectiva" },
-  { value: 100, suffix: "%", label: "Cadena de trazabilidad" },
-];
-
 const Stats = forwardRef<HTMLDivElement>((_, ref) => {
+  const stats = [
+    {
+      value: new Date().getFullYear() - FUNDACION,
+      prefix: "+",
+      label: "Años de trayectoria",
+    },
+    { value: 3000, prefix: "+", label: "Productos disponibles" },
+    { value: 24, suffix: "hs", label: "Entrega efectiva" },
+    { value: 100, suffix: "%", label: "Cadena de trazabilidad" },
+  ];
   return (
     <section
       id="stats"

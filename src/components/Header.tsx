@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import logoColor from "/assets/logo_color.png";
+import logoWhite from "/assets/logo_white.svg";
 
 function Header({
   refs,
@@ -45,7 +45,7 @@ function Header({
           aria-label="Volver al inicio"
         >
           <img
-            src={logoColor}
+            src={logoWhite}
             alt="Farma Salud Norte"
             className={`h-11 w-auto object-contain transition-all duration-300`}
           />

@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import { HeartPulse, Building2, Landmark, Truck } from "lucide-react";
+import logoColor from "/assets/logo_color.svg";
 
 const services = [
   {
@@ -38,8 +39,13 @@ const services = [
 
 const Services = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <section id="services" ref={ref} className="py-24 bg-neutral-50">
+    <section id="services" ref={ref} className="py-12 bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <img
+          src={logoColor}
+          alt="Farma Salud Norte"
+          className="mx-auto h-32 mb-12"
+        />
         <div className="text-center mb-16">
           <span className="section-tag">Áreas de Atención</span>
           <h2 className="section-title">
