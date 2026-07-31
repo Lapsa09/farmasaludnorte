@@ -5,15 +5,6 @@ import { FaLinkedin, FaWhatsapp, FaInstagram } from "react-icons/fa";
 const Contact = forwardRef<HTMLDivElement>((_, ref) => {
   const contactItems = [
     {
-      icon: <MapPin className="w-5 h-5" />,
-      label: "Dirección",
-      content:
-        "Rondeau 2836, B1650 Villa Juan Martín de Pueyrredón, Buenos Aires",
-      href: "https://maps.app.goo.gl/rduTFvMhfGNKr4N17",
-      target: "_blank",
-      bg: "bg-blue-50 text-primary",
-    },
-    {
       icon: <Phone className="w-5 h-5" />,
       label: "Teléfono",
       content: "(011) 4839-8284",
@@ -27,6 +18,15 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
       href: "https://wa.me/5491158827073",
       target: "_blank",
       bg: "bg-green-50 text-secondary-dark",
+    },
+    {
+      icon: <MapPin className="w-5 h-5" />,
+      label: "Dirección",
+      content:
+        "Rondeau 2836, B1650 Villa Juan Martín de Pueyrredón, Buenos Aires",
+      href: "https://maps.app.goo.gl/rduTFvMhfGNKr4N17",
+      target: "_blank",
+      bg: "bg-blue-50 text-primary",
     },
     {
       icon: <Mail className="w-5 h-5" />,
@@ -90,7 +90,7 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
             <p className="text-secondary-light font-semibold text-sm">
               ventas@farmanorte.com.ar
             </p>
-            <p className="text-white/50 text-xs mt-1">Escribinos →</p>
+            <p className="text-white text-xs mt-1">Escribinos →</p>
           </div>
         </a>
 
@@ -116,7 +116,7 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
             <p className="text-white font-semibold text-sm">
               compras@farmanorte.com.ar
             </p>
-            <p className="text-white/50 text-xs mt-1">Escribinos →</p>
+            <p className="text-white text-xs mt-1">Escribinos →</p>
           </div>
         </a>
 

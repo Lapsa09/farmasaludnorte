@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import logoColor from "/assets/logo-color.png";
+import logoColor from "/assets/logo_color.png";
 
 function Header({
   refs,
@@ -11,22 +11,9 @@ function Header({
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const HEADER_H = 80; // matches h-20 in Tailwind
-
-    const check = () => {
-      // Check all elements behind the header's bottom edge
-      const elements = document.elementsFromPoint(
-        window.innerWidth / 2,
-        HEADER_H,
-      );
-      const isOverDark = elements.some(
-        (el) => !el.closest("header") && el.hasAttribute("data-header-dark"),
-      );
-      setScrolled(!isOverDark);
-    };
-
+    const check = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", check, { passive: true });
-    check(); // run on mount
+    check();
     return () => window.removeEventListener("scroll", check);
   }, []);
 
@@ -47,7 +34,7 @@ function Header({
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-400 ${
-        scrolled ? "bg-transparent backdrop-blur-md shadow-sm" : "bg-white/98"
+        scrolled ? "bg-primary-dark backdrop-blur-md shadow-sm" : "bg-white/98"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -60,7 +47,7 @@ function Header({
           <img
             src={logoColor}
             alt="Farma Salud Norte"
-            className={`h-11 w-auto object-contain transition-all duration-300 ${"[filter:drop-shadow(1px_0_0_rgba(255,255,255,0.5))_drop-shadow(-1px_0_0_rgba(255,255,255,0.5))_drop-shadow(0_1px_0_rgba(255,255,255,0.5))_drop-shadow(0_-1px_0_rgba(255,255,255,0.5))]"}`}
+            className={`h-11 w-auto object-contain transition-all duration-300`}
           />
         </button>
 
@@ -70,11 +57,7 @@ function Header({
             <button
               key={link.id}
               onClick={() => scrollToSection(link.id)}
-              className={`relative text-sm font-medium transition-colors duration-200 group ${
-                scrolled
-                  ? "text-neutral-700 hover:text-primary"
-                  : "text-white/85 hover:text-white"
-              }`}
+              className="relative text-sm font-medium transition-colors duration-200 group text-white/85 hover:text-white"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full rounded-full" />
@@ -85,11 +68,7 @@ function Header({
         {/* Mobile menu button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`md:hidden p-2 rounded-lg transition-colors ${
-            scrolled
-              ? "text-neutral-800 hover:bg-neutral-100"
-              : "text-white hover:bg-white/10"
-          }`}
+          className="md:hidden p-2 rounded-lg transition-colors text-white hover:bg-white/10"
           aria-label="Abrir menú"
         >
           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
