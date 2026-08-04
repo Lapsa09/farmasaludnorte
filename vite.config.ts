@@ -13,4 +13,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["lucide-react"],
   },
+  assetsInclude: ["**/*.PNG", "**/*.jpg", "**/*.jpeg", "**/*.svg", "**/*.gif"],
 });

@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { HeartPulse, Building2, Landmark, Truck } from "lucide-react";
-import logoColor from "/assets/logo_color.svg";
+import logoColor from "/assets/logo_color.png";
 
 const services = [
   {
@@ -39,44 +39,46 @@ const services = [
 
 const Services = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <section id="services" ref={ref} className="py-12 bg-neutral-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" ref={ref} className="py-12">
+      <div className="mb-12 mx-auto flex justify-center px-4">
         <img
           src={logoColor}
           alt="Farma Salud Norte"
-          className="mx-auto h-32 mb-12"
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto"
         />
-        <div className="text-center mb-16">
-          <span className="section-tag">Áreas de Atención</span>
-          <h2 className="section-title">
-            Soluciones para cada{" "}
-            <span className="text-gradient">necesidad farmacéutica</span>
-          </h2>
-          <p className="section-subtitle mt-2">
-            Cobertura integral de todo el canal farmacéutico con atención
-            especializada por segmento.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((svc, i) => (
-            <div
-              key={i}
-              className={`bg-white p-8 rounded-2xl border-b-4 ${svc.accent} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group`}
-            >
+      </div>
+      <div className="bg-neutral-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center mb-16">
+            <span className="section-tag">Áreas de Atención</span>
+            <h2 className="section-title">
+              Soluciones para cada necesidad farmacéutica
+            </h2>
+            <p className="section-subtitle mt-2">
+              Cobertura integral de todo el canal farmacéutico con atención
+              especializada por segmento.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((svc, i) => (
               <div
-                className={`w-14 h-14 ${svc.iconBg} rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110`}
+                key={i}
+                className={`bg-white p-8 rounded-2xl border-b-4 ${svc.accent} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group`}
               >
-                <svc.icon size={26} />
+                <div
+                  className={`w-14 h-14 ${svc.iconBg} rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110`}
+                >
+                  <svc.icon size={26} />
+                </div>
+                <h3 className="font-display text-xl font-bold text-primary-dark mb-3">
+                  {svc.title}
+                </h3>
+                <p className="text-sm text-neutral-500 leading-relaxed">
+                  {svc.description}
+                </p>
               </div>
-              <h3 className="font-display text-xl font-bold text-primary-dark mb-3">
-                {svc.title}
-              </h3>
-              <p className="text-sm text-neutral-500 leading-relaxed">
-                {svc.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

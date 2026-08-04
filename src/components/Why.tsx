@@ -61,13 +61,12 @@ const pillars = [
 
 const Why = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <section id="why" ref={ref} className="py-24 bg-white">
+    <section id="why" ref={ref} className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="section-tag">¿Por qué elegirnos?</span>
           <h2 className="section-title">
-            Su socio estratégico en{" "}
-            <span className="text-gradient">salud farmacéutica</span>
+            Su socio estratégico en salud farmacéutica
           </h2>
           <p className="section-subtitle mt-2">
             Nuestra trayectoria y compromiso nos posicionan como referentes del

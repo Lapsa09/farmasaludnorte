@@ -90,7 +90,7 @@ function Footer() {
               />
               <div>
                 <p className="text-white/80 font-medium">Lunes a Viernes</p>
-                <p>9:00 – 17:00</p>
+                <p>9:00 hrs – 17:00 hrs</p>
               </div>
             </li>
             <li className="pl-7">

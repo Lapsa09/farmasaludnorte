@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react";
-import office1 from "/assets/office1.jpeg";
+import office1 from "/assets/storage.png";
 
 const Hero = forwardRef<HTMLDivElement>((_, ref) => {
   return (
@@ -15,7 +15,7 @@ const Hero = forwardRef<HTMLDivElement>((_, ref) => {
         <img
           src={office1}
           alt="Instalaciones Farma Salud Norte"
-          className="w-full object-cover -translate-y-[45%]"
+          className="w-full h-full object-cover xl:-translate-y-[55%] xl:h-auto"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/95 via-primary-dark/85 to-primary/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />

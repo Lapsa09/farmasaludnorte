@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import logoWhite from "/assets/logo_white.svg";
+import logoWhite from "/assets/logo_white.png";
 
 function Header({
   refs,
@@ -47,7 +47,7 @@ function Header({
           <img
             src={logoWhite}
             alt="Farma Salud Norte"
-            className={`h-11 w-auto object-contain transition-all duration-300`}
+            className={`h-16 my-auto transition-all duration-300`}
           />
         </button>
 

@@ -54,13 +54,11 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-neutral-50" ref={ref}>
+    <section id="contact" className="py-12 bg-neutral-50" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="section-tag">Contacto</span>
-          <h2 className="section-title">
-            Estamos para <span className="text-gradient">ayudarte</span>
-          </h2>
+          <h2 className="section-title">Estamos para ayudarte</h2>
           <p className="section-subtitle mt-2">
             Comunicate por el canal que prefieras. Nuestro equipo está listo
             para asesorarte.
